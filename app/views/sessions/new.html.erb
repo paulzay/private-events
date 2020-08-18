@@ -6,10 +6,10 @@
     <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
 
       <%= f.label :name %>
-      <%= f.password_field :name, class: 'form-control' %>
+      <%= f.text_field :name, class: 'form-control' %><br>
 
       <%= f.label :emal %>
-      <%= f.email_field :emal, class: 'form-control' %>
+      <%= f.email_field :emal, class: 'form-control' %><br>
 
 
 

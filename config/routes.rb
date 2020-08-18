@@ -5,4 +5,11 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   get '/signup', to: 'users#new'
+
+  resources :events
+  get '/new', to: 'events#new'
+  post '/create', to: 'events#create'
+  delete '/delete', to: 'events#destroy'
+  put '/edit', to: 'events#update'
+
 end
