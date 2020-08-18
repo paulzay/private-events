@@ -1,15 +1,17 @@
 class EventsController < ApplicationController
+  
     def index
         @events = Event.all 
     end
     def new
-        @event = Event.new
+        @event = current_user.events.build
     end
     def show
         @event = Event.find(params[:id])
     end
     def create
-        @event = Event.build(events_params)
+        @event = current_user.events.build(event_params)
+       
         if @event.save
             redirect_to @event
         else
@@ -30,7 +32,7 @@ class EventsController < ApplicationController
 
     private
 
-    def events_params
-        params.permit(:event).require(:event_date, :description)
+    def event_params
+        params.require(:event).permit(:event_date, :description)
     end
 end

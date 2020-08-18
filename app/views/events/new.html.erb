@@ -1,6 +1,8 @@
 <h2>Create Event</h2>
 <%= form_with model: @event, class: "nifty_form" do |f| %>
+<%= f.label :event_date %><br><br>
   <%= f.date_field :event_date %><br><br>
-  <%= f.text_area :description, size: "60x12" %><br><br>
+  <%= f.label :description%><br><br>
+  <%= f.text_area :description, size: "40x12" %><br><br>
   <%= f.submit "Create" %>
 <% end %>
