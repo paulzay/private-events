@@ -6,3 +6,8 @@
 <% @user.events.each do |e| %>
 	<%= link_to e.name, event_path(e)%>
 <% end %>
+
+
+<div class="btn-group">
+<%= link_to "Back to all events", events_path, :class => "btn"%>
+</div>
