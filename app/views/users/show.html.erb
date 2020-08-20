@@ -1,9 +1,8 @@
 
 <h2>User Profile</h2>
-<%= @user.emal %><br /> 
+<%= @user.email %><br /> 
 <%= @user.name %><br />
-<div class="btn-group">
- <%= link_to "Edit", edit_user_path %> |  <%= link_to "Delete", :confirm => "Are you sure?", :method => :delete, :class => "btn" %> 
-<%= link_to "New Event", new_event_path, :class => "btn" %>
-</div>
 
+<% @user.events.each do |e| %>
+	<%= link_to e.name, event_path(e)%>
+<% end %>

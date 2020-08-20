@@ -1,9 +1,11 @@
 <%= form_for @event do |f| %>
-  <%= f.label 'Dtae' %><br>
-  <%= f.date_field :event_date %><br>
-
-  <%= f.label 'Event Description' %><br>
-  <%= f.text_area :description %><br>
-
-  <%= f.submit "Submit Event" %>
+  <%= f.label :date %><br><br>
+  <%= f.date_field :date %><br><br>
+  <%= f.label :location %><br><br>
+  <%= f.text_field :location  %><br><br>
+  <%= f.label :name %><br><br>
+  <%= f.text_field :name  %><br><br>
+  <%= f.label :description%><br><br>
+  <%= f.text_area :description, size: "40x12" %><br><br>
+  <%= f.submit "Create" %>
 <% end %>
