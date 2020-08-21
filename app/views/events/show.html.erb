@@ -1,11 +1,33 @@
-<h1><%= @event.name %></h1>
-<p><%= @event.date %></p>
-<p><b>Event Creator: </b><%= @event.creator.name %></p>
-
-<hr>
-<p>Attendees</p>
 
 
-<div class="btn-group">
-<%= link_to "Back to all events", events_path, :class => "btn"%>
-</div>
+
+
+`<h1><%= @event.name %></h1>
+  <h2><%= @event.date %></h2>   
+  <h2><%= @event.location %></h2> 
+  <p><%= @event.description %></p>  
+  <%= @at_list.blank? %>
+  <%= @at_list_att.blank? %>
+  <%=sql = "Select * from event_attendees"
+   at_list = ActiveRecord::Base.connection.execute(sql) %>
+
+   <% @event.event_attendees.map do |eventattendance| %>
+     <tr>
+     <td><%= eventattendance.user_id %></td>
+     </tr>
+   <% end %>
+
+   <%= link_to "<< Back to Event List", events_path %>
+
+   <p> </p>
+   <br>
+
+   <% if logged_in? %>
+   <%= link_to "edit", edit_event_path(@event) %>
+   <%= link_to "delete", event_path(@event), method: :delete, data: { confirm: "Are you sure?" } %>
+   <% end %>
+
+
+<%= link_to "Cancel atendance", eventattendance_path(event_id: @event.id), method: :delete, class: "btn btn-primary" %>
+
+<%= link_to "Attend", new_events_attendances_path(event_id: @event.id), class: "btn btn-success"%>

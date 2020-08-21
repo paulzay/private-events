@@ -3,9 +3,7 @@
 <%= @user.email %><br /> 
 <%= @user.name %><br />
 
-<% @user.events.each do |e| %>
-	<%= link_to e.name, event_path(e)%>
-<% end %>
+
 
 
 <div class="btn-group">

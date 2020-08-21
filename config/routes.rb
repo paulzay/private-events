@@ -14,4 +14,9 @@ Rails.application.routes.draw do
   put '/edit', to: 'events#update'
   put '/attend', to: 'events#attend'
 
+
+ resources :user_sessions, only: [ :new, :create, :destroy ]
+ resources :eventattendances, only: [:destroy, :new, :show]
+
+
 end

@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+    # before_filter :require_login, except: [:index]
+
   
     def index
         @events = Event.all 
@@ -23,12 +25,7 @@ class EventsController < ApplicationController
         end
     end
 
-    def attend
-        @event = current_user.events.build(event_params)
-        @event.current_user << @event
-        
-        redirect_to @current_user
-    end
+    
     def update
         @event = Event.find(params[:id])
         @event.update!(event_params)
