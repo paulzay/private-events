@@ -4,7 +4,12 @@ Date: <%= @event.date%><p>
 Location: <%= @event.location%><p>
 
 Description: <%= @event.description%><p>
+<hr>
 
+  <%= link_to "Edit", edit_event_path(@event) %>
+   <%= link_to "delete", event_path(@event),data: {confirm: "Really delete the event?"}, method: :delete %> 
+
+<hr>
 Attendees: <p>
 
 <% @event.attendees.each do |attendee| %>
@@ -19,4 +24,4 @@ Attendees: <p>
   <%= f.submit 'Invite' %>
 <% end %>
 
-  
+
