@@ -1,36 +1,14 @@
-<h1>Listing Events</h1>
+<% provide(:title, "All Events") %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Event name</th>
-      <th>Description</th>
-      <th>Location</th>
-      <th>Date</th>
-      <th colspan="4"></th>
-    </tr>
-  </thead>
+<h1>All Events</h1>
 
-  <tbody>
-    <% Event.all.each do |f| %>
-      <tr>
-        
-        <td><%= f.name %></td>
-        <td><%= f.description %></td>
-        <td><%= f.location %></td>
-        <td><%= f.date %></td>
-        <td><%= link_to "Show", event_path(f) %></td>
-        <td><%= link_to "Edit", edit_event_path(f)  %></td>
-        <td><%= link_to "Destroy", event_path(f), method: :delete, data: { confirm: "Are you sure?" }  %></td>        
+Past Events:<P>
 
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% Event.past.each do |e| %>
+	<%= link_to e.name, e %>, created by <%= e.creator.name%> <p>
+<% end %>
+<p>Upcoming Events:<p>
 
-<br>
-
-
-<div class="btn-group">
-<%= link_to "New Event", new_event_path, :class => "btn"%>
-</div>
+<% Event.upcoming.each do |e| %>
+	<%= link_to e.name, e %>, created by <%= e.creator.name%> <p>
+<% end %>

@@ -1,7 +1,22 @@
-<h1><%= @event.name %></h1>
-<p><%= @event.date %></p>
-<p><b>Event Creator: </b><%= @event.creator.name %></p>
+Event Name : <%= @event.name%><p>
+Date: <%= @event.date%><p>
 
-<div class="btn-group">
-<%= link_to "Back to all events", events_path, :class => "btn"%>
-</div>
+Location: <%= @event.location%><p>
+
+Description: <%= @event.description%><p>
+
+Attendees: <p>
+
+<% @event.attendees.each do |attendee| %>
+	<%= attendee.name %> 
+<% end %>
+
+<p>Invite attendees:</p>
+
+<%= form_for @invitation do |f| %>
+  <%= hidden_field_tag("invitation[attended_event_id]", "#{@event.id}") %>
+  <%= f.collection_select(:attendee_id, User.all, :id, :name) %>
+  <%= f.submit 'Invite' %>
+<% end %>
+
+  

@@ -1,8 +1,5 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:show]
-  def show
-    @user = User.find(params[:id])
-  end
 
   def new
     @user = User.new
@@ -16,6 +13,12 @@ class UsersController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def show
+    @user = User.find(params[:id])
+    @upcoming_events = @user.attended_events.upcoming
+    @past_events = @user.attended_events.past
   end
 
   private

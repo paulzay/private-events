@@ -1,42 +1,47 @@
 class EventsController < ApplicationController
-  
-    def index
-        @events = Event.all 
-    end
-    def new
-        @event = current_user.events.build
-    end
-    def show
-        @event = Event.find(params[:id])
-    end
-    def edit
-        @event = Event.find(params[:id])
-    end
+  before_action :logged_in_user, only: [:create]
 
-    def create
-        @event = current_user.events.build(event_params)
-       
-        if @event.save
-            redirect_to event_path(@event)
-        else
-            render 'new'
-        end
-    end
-    def update
-        @event = Event.find(params[:id])
-        @event.update!(event_params)
-        redirect_to @event
-    end
+  def index
+    @events = Event.all
+  end
 
-    def destroy
-        @event= Event.find(params[:id])
-        @event.destroy!
-        redirect_to :new
-    end
+  def new
+    @event = current_user.created_events.build
+  end
 
-    private
+  def create
+    @event = current_user.created_events.build(event_params)
 
-    def event_params
-        params.require(:event).permit(:date, :name, :location, :description)
+    if @event.save
+      @event.attendees << current_user
+      redirect_to root_path
     end
+  end
+
+  def edit
+    @event = Event.find(params[:id])
+  end
+
+  def show
+    @event = Event.find(params[:id])
+    @invitation = Invitation.new
+  end
+
+  def update
+    @event = Event.find(params[:id])
+    @event.update!(event_params)
+    redirect_to @event
+  end
+
+  def destroy
+    @event = Event.find(params[:id])
+    @event.destroy!
+    redirect_to :new
+  end
+
+  private
+
+  def event_params
+    params.require(:event).permit(:date, :name, :location, :description)
+  end
 end
