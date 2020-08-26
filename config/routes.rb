@@ -7,10 +7,6 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get '/signup', to: 'users#new'
 
-  resources :events
-  get '/new', to: 'events#new'
-  post '/create', to: 'events#create'
-  delete '/delete', to: 'events#destroy'
-  put '/edit', to: 'events#update'
+  resources :events, only: [:new, :create, :show, :index, :edit, :destroy]
   resources :invitations, only: [:new, :create]
 end

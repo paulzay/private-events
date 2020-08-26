@@ -1,14 +1,12 @@
-<% provide(:title, "All Events") %>
-
 <h1>All Events</h1>
 
 Past Events:<P>
 
-<% Event.past.each do |e| %>
+<% @past_events.each do |e| %>
 	<%= link_to e.name, e %>, created by <%= e.creator.name%> <p>
 <% end %>
 <p>Upcoming Events:<p>
 
-<% Event.upcoming.each do |e| %>
+<% @upcoming_events.each do |e| %>
 	<%= link_to e.name, e %>, created by <%= e.creator.name%> <p>
 <% end %>
