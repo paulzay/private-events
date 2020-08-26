@@ -1,0 +1,12 @@
+<h1>All Events</h1>
+
+Past Events:<P>
+
+<% @past_events.each do |e| %>
+	<%= link_to e.name, e %>, created by <%= e.creator.name%> <p>
+<% end %>
+<p>Upcoming Events:<p>
+
+<% @upcoming_events.each do |e| %>
+	<%= link_to e.name, e %>, created by <%= e.creator.name%> <p>
+<% end %>

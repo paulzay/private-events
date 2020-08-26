@@ -1,0 +1,27 @@
+Event Name : <%= @event.name%><p>
+Date: <%= @event.date%><p>
+
+Location: <%= @event.location%><p>
+
+Description: <%= @event.description%><p>
+<hr>
+
+  <%= link_to "Edit", edit_event_path(@event) %>
+   <%= link_to "delete", event_path(@event),data: {confirm: "Really delete the event?"}, method: :delete %> 
+
+<hr>
+Attendees: <p>
+
+<% @event.attendees.each do |attendee| %>
+	<%= attendee.name %> 
+<% end %>
+
+<p>Invite attendees:</p>
+
+<%= form_for @invitation do |f| %>
+  <%= hidden_field_tag("invitation[attended_event_id]", "#{@event.id}") %>
+  <%= f.collection_select(:attendee_id, User.all, :id, :name) %>
+  <%= f.submit 'Invite' %>
+<% end %>
+
+
